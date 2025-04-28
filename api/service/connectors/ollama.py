@@ -53,3 +53,15 @@ class Ollama:
 
         return response
 
+class Chatter:
+    _instance = None
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
+    def __init__(self, base_url, model):
+        self.chatter = Ollama(base_url=base_url, model=model)
+
+    def get_response(self, message):
+        return self.chatter.get_response(message)
