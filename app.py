@@ -19,7 +19,7 @@ with open("version.txt", "r") as f:
 
 app = FastAPI(
     title="Message Sentiment Analyzer",
-    description="Made by Mahasvan Mohan",
+    description="Made for STIRS2023_MESA",
     swagger_ui_parameters={"syntaxHighlight": {"theme": "obsidian"}},
     version=VERSION,
     # openapi_tags=[{"name": "Chat"}, {"name": "Meta"}]
