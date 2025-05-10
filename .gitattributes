@@ -1,1 +1,12 @@
 *.h5 filter=lfs diff=lfs merge=lfs -text
+jigsaw/test_public_expanded.csv filter=lfs diff=lfs merge=lfs -text
+jigsaw/toxicity_individual_annotations.csv filter=lfs diff=lfs merge=lfs -text
+jigsaw/train.csv filter=lfs diff=lfs merge=lfs -text
+jigsaw/all_data.csv filter=lfs diff=lfs merge=lfs -text
+jigsaw/identity_individual_annotations.csv filter=lfs diff=lfs merge=lfs -text
+jigsaw/sample_submission.csv filter=lfs diff=lfs merge=lfs -text
+jigsaw/test_private_expanded.csv filter=lfs diff=lfs merge=lfs -text
+jigsaw/threads.json filter=lfs diff=lfs merge=lfs -text
+jigsaw/README.md filter=lfs diff=lfs merge=lfs -text
+jigsaw/dataset_text_target.csv filter=lfs diff=lfs merge=lfs -text
+jigsaw/test.csv filter=lfs diff=lfs merge=lfs -text
