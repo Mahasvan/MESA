@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 class BetterJSONResponse(JSONResponse):
     def __init__(self, content=None, status_code=200, headers=None, error=None):
 
-        if content:
+        if content is not None:
             content = {
                 "response": content
             }
