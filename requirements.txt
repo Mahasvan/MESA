@@ -7,3 +7,7 @@ fastapi~=0.115.12
 scikit-learn~=1.6.1
 python-dotenv~=1.1.0
 uvicorn~=0.34.2
+torch
+streamlit
+transformers
+tensorflow
