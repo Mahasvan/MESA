@@ -3,6 +3,7 @@ import os
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
 from api.service import shell
 
 if not os.environ.get("IS_CONTAINER", False):
@@ -11,6 +12,7 @@ if not os.environ.get("IS_CONTAINER", False):
     # if this variable is not set, the app is running on bare metal.
     # so, we will load the environment variables from the `.env ` file.
     from dotenv import load_dotenv
+
     load_dotenv()
     shell.print_cyan_message("Environment variables loaded successfully.")
 
@@ -60,4 +62,5 @@ OLLAMA_BASE_URL = http://vader.mahasvan.int:11434
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=8000)

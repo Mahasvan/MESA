@@ -1,5 +1,5 @@
-import streamlit as st
 import requests
+import streamlit as st
 
 # API endpoint configuration
 API_HOST = st.sidebar.text_input("API Host", "localhost")
@@ -21,6 +21,7 @@ st.write("Enter a sentence to check if it's toxic or not.")
 # Input text box
 user_input = st.text_area("Enter your text here:", height=150)
 
+
 # Helper function to call API endpoint
 def call_api(endpoint, message):
     """Call a specific API endpoint and return the result"""
@@ -31,6 +32,7 @@ def call_api(endpoint, message):
         return response.json()["response"], None
     else:
         return None, f"API returned status code {response.status_code}: {response.text}"
+
 
 # Helper function to display result
 def display_result(result, model_name=""):
@@ -44,6 +46,7 @@ def display_result(result, model_name=""):
         st.write(f"{prefix}The message is considered toxic.")
     else:
         st.warning(f"{prefix}Unexpected response from API")
+
 
 # Submit button
 if st.button("Check Toxicity"):

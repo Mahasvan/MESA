@@ -9,6 +9,7 @@ class CNNModel:
         self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
         self.maximum_length = 128  # Maximum length of input sequences
         self.threshold = 0.5
+
     def encode(self, text):
         return self.tokenizer.batch_encode_plus(
             [text],
@@ -24,4 +25,3 @@ class CNNModel:
         y_pred_prob = self.model.predict(encoded["input_ids"])
         y_pred = (y_pred_prob > self.threshold).astype(int)
         return y_pred[0]
-

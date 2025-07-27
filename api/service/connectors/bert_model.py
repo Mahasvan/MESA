@@ -1,6 +1,8 @@
-from transformers import BertTokenizer, TFBertForSequenceClassification
 import tensorflow as tf
-#Tokenize and encode the data using the BERT tokenizer
+from transformers import BertTokenizer, TFBertForSequenceClassification
+
+
+# Tokenize and encode the data using the BERT tokenizer
 
 class BertModel:
 

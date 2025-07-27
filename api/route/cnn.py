@@ -8,6 +8,7 @@ prefix = "/cnn"
 
 cnn_model = CNNModel()
 
+
 @router.get("/predict")
 async def predict(message: str):
     res = cnn_model.predict(message)

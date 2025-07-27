@@ -8,6 +8,7 @@ prefix = "/bert"
 
 bert_model = BertModel()
 
+
 @router.get("/predict")
 async def predict(message: str):
     res = bert_model.predict(message)

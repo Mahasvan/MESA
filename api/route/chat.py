@@ -1,6 +1,7 @@
 import os
 
 from fastapi.routing import APIRouter
+
 from api.service.connectors.ollama import Chatter
 from api.service.response import BetterJSONResponse
 
@@ -15,6 +16,7 @@ if not model:
     raise Exception("OLLAMA_MODEL environment variable not set.")
 
 chatter = Chatter(base_url=ollama_base_url, model=model)
+
 
 @router.get("/predict")
 async def predict(message: str):

@@ -21,12 +21,14 @@ Neutral or benign messages should score close to 0.0.
 Be as accurate as possible in your classification. The input will be a single message in plain text.
 """
 
+
 class ResponseFormat(BaseModel):
     # target: float
     obscene: float
     identity_attack: float
     insult: float
     threat: float
+
 
 class Ollama:
     def __init__(self, model: str = "llama3.2:1b", base_url: str = "http://localhost:11434"):
@@ -53,8 +55,10 @@ class Ollama:
 
         return response
 
+
 class Chatter:
     _instance = None
+
     def __new__(cls, *args, **kwargs):
         if cls._instance is None:
             cls._instance = super().__new__(cls)
