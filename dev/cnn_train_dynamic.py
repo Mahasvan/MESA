@@ -26,8 +26,8 @@ hidden_dim_1 = 128  # Neurons in the dense hidden layer
 gamma = 0.2
 
 batch_size = 64
-epochs = 10
-threshold = 0.5
+epochs = 25
+threshold = 0.7
 # DATASET_SIZE = 100_000
 
 # Load and preprocess the dataset
@@ -142,6 +142,7 @@ history = {
 }
 
 best_val_loss = float('inf')
+best_val_accuracy = float('inf')
 best_model_wts = copy.deepcopy(model.state_dict())
 
 for epoch in range(epochs):
@@ -212,8 +213,8 @@ for epoch in range(epochs):
     history['val_accuracy'].append(val_accuracy)
 
     # Save the best model
-    if avg_val_loss < best_val_loss:
-        best_val_loss = avg_val_loss
+    if val_accuracy < best_val_accuracy:
+        best_val_accuracy = val_accuracy
         best_model_wts = copy.deepcopy(model.state_dict())
 
     print(f"{'Dyn' if dynamic else 'Nor'} Epoch {epoch + 1}/{epochs} | "
