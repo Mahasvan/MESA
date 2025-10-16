@@ -32,7 +32,7 @@ threshold = 0.5
 
 # Load and preprocess the dataset
 # Make sure the path to your CSV is correct
-df = pd.read_csv("../jigsaw/dataset_text_target.csv")
+df = pd.read_csv("../jigsaw/dataset_text_target.csv").dropna()
 # df_true = df[df.target > 0.5]
 # df_false = df[df.target <= 0.5]
 # df = pd.concat([df_true[:DATASET_SIZE // 2], df_false[:DATASET_SIZE // 2]], axis=0)
