@@ -28,14 +28,14 @@ gamma = 0.2
 batch_size = 64
 epochs = 10
 threshold = 0.5
-DATASET_SIZE = 100_000
+# DATASET_SIZE = 100_000
 
 # Load and preprocess the dataset
 # Make sure the path to your CSV is correct
 df = pd.read_csv("../jigsaw/dataset_text_target.csv")
-df_true = df[df.target > 0.5]
-df_false = df[df.target <= 0.5]
-df = pd.concat([df_true[:DATASET_SIZE // 2], df_false[:DATASET_SIZE // 2]], axis=0)
+# df_true = df[df.target > 0.5]
+# df_false = df[df.target <= 0.5]
+# df = pd.concat([df_true[:DATASET_SIZE // 2], df_false[:DATASET_SIZE // 2]], axis=0)
 mapper = lambda x: 1 if x > 0.5 else 0
 df['target'] = df['target'].apply(mapper)
 
