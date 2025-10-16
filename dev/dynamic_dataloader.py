@@ -22,8 +22,6 @@ class CustomDataLoader:
 
 
     def update_losses(self, losses: Dict[int, float]):
-        if len(self.batch_losses) == 0:
-            self.batch_losses = losses
         self.batch_losses.update(losses)
 
     def generate(self, dynamic: bool = False):
