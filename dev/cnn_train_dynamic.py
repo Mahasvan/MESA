@@ -126,7 +126,7 @@ model = CNNTextClassifier(
 )
 
 # Set device (use GPU if available)
-device = torch.device("mps" if torch.mps.is_available() else "cpu")
+device = torch.device("mps" if torch.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 
 # Loss function and optimizer
