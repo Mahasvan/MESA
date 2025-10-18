@@ -1,7 +1,7 @@
 import pandas as pd
 
 data_size = 1_000
-epochs = 5
+epochs = 25
 
 df = pd.read_csv("../jigsaw/dataset_text_target.csv")
 # df_true = df[df.target > 0.5]
