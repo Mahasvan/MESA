@@ -3,7 +3,7 @@ import pandas as pd
 data_size = 1_000
 epochs = 25
 
-df = pd.read_csv("../jigsaw/dataset_text_target.csv")
+df = pd.read_csv("../jigsaw/dataset_text_target.csv").dropna()
 # df_true = df[df.target > 0.5]
 # df_false = df[df.target <= 0.5]
 
