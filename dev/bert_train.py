@@ -4,10 +4,8 @@ data_size = 1_000
 epochs = 10
 
 df = pd.read_csv("../jigsaw/dataset_text_target.csv").dropna()
-# df_true = df[df.target > 0.5]
-# df_false = df[df.target <= 0.5]
 
-# df = pd.concat([df_true[:data_size // 2], df_false[:data_size // 2]], axis=0)
+print("Dataset size: ", len(df))
 
 mapper = lambda x: 1 if x > 0.7 else 0
 df.target = df.target.apply(mapper)
@@ -20,10 +18,13 @@ x_train, x_test, y_train, y_test = train_test_split(df.comment_text, df.target, 
 
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
 
+print("Loaded tokenizer")
+
 max_len = 128
 
 # In[12]:
 
+print("Starting encoding")
 
 X_train_encoded = tokenizer.batch_encode_plus(
     x_train.tolist(),
@@ -42,10 +43,13 @@ X_test_encoded = tokenizer.batch_encode_plus(
     return_tensors='tf'
 )
 
+print("Finished encoding")
 # In[13]:
 
 
+print("Loading BERT")
 model = TFBertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=2)
+print("Finished loading BERT")
 
 # In[14]:
 
@@ -62,7 +66,7 @@ model.compile(optimizer=optimizer, loss=loss, metrics=[metric])
 
 # In[16]:
 
-
+print("Starting training")
 history = model.fit(
     [X_train_encoded['input_ids'], X_train_encoded['token_type_ids'], X_train_encoded['attention_mask']],
     y_train,
@@ -71,6 +75,7 @@ history = model.fit(
     batch_size=64,
     epochs=epochs
 )
+print("Finished training")
 
 from sklearn.metrics import classification_report
 
@@ -85,10 +90,11 @@ y_pred = tf.argmax(y_pred.logits, axis=1).numpy()
 
 
 print(classification_report(y_test, y_pred))
+with open("classification_report.txt", "w") as f:
+    f.write(classification_report(y_test, y_pred))
 
 import json
-
-with open("result.json", "w") as f:
+with open("history.json", "w") as f:
     json.dump(history.history, f, indent=2)
 
 # Save history (loss and accuracy for train and validation) to CSV as well
