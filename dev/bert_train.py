@@ -1,7 +1,7 @@
 import pandas as pd
 
 data_size = 1_000
-epochs = 25
+epochs = 10
 
 df = pd.read_csv("../jigsaw/dataset_text_target.csv").dropna()
 # df_true = df[df.target > 0.5]
@@ -90,6 +90,11 @@ import json
 
 with open("result.json", "w") as f:
     json.dump(history.history, f, indent=2)
+
+# Save history (loss and accuracy for train and validation) to CSV as well
+hist_df = pd.DataFrame(history.history)
+hist_df.index = hist_df.index + 1  # start epochs at 1 for readability
+hist_df.to_csv("history.csv", index_label="epoch")
 
 model.save_pretrained("bert_model_trained")
 
