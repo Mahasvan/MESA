@@ -6,13 +6,13 @@ class EarlyStopping:
         self.history = []
 
 
-    def _get_derivative(self):
+    def _get_derivative(self, step=1):
         d = []
-        for i in range(1, len(self.history)):
-            d.append(self.history[i] - self.history[i-1])
+        for i in range(step, len(self.history)):
+            d.append(self.history[i] - self.history[i-step])
         return d
 
-    def record(self, value, window=3):
+    def record(self, value, window=3, step=1):
         """
         :param value: the loss vaue to be recorded
         :param window: the number of past loss values to consider
@@ -20,7 +20,7 @@ class EarlyStopping:
         """
         self.history.append(value)
         if len(self.history)  < window+1: return False
-        derivative = self._get_derivative()[-window:]
+        derivative = self._get_derivative(step)[-window:]
         # print(derivative)
         # if for three continuous epochs, the loss keeps increasing, then stop the training.
         if all([x > 0 for x in derivative]): return True
