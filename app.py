@@ -62,5 +62,4 @@ OLLAMA_BASE_URL = http://vader.mahasvan.int:11434
 
 if __name__ == "__main__":
     import uvicorn
-
     uvicorn.run(app, host="0.0.0.0", port=8000)
