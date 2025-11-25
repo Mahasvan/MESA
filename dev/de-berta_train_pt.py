@@ -17,7 +17,7 @@ OUTPUT_DIR = "deberta_trained"
 DATA_PATH = "../jigsaw/dataset_text_target.csv"  # Ensure this path exists relative to where you run the script
 MODEL_NAME = "microsoft/deberta-v3-base"
 
-# os.environ["TOKENIZERS_PARALLELISM"] = "false"
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 # Create output directory
 os.makedirs(OUTPUT_DIR, exist_ok=True)
