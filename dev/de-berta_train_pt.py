@@ -17,13 +17,15 @@ OUTPUT_DIR = "deberta_trained"
 DATA_PATH = "../jigsaw/dataset_text_target.csv"  # Ensure this path exists relative to where you run the script
 MODEL_NAME = "microsoft/deberta-v3-base"
 
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
 # Create output directory
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # --- Parameters ---
 MAXIMUM_LENGTH = 256
 BATCH_SIZE = 64
-EPOCHS = 50
+EPOCHS = 1
 THRESHOLD = 0.5
 # DATASET_SIZE = 1_000
 
@@ -50,7 +52,7 @@ def load_and_process_data():
     if not os.path.exists(DATA_PATH):
         raise FileNotFoundError(f"Could not find dataset at {DATA_PATH}")
 
-    df = pd.read_csv(DATA_PATH).dropna()
+    df = pd.read_csv(DATA_PATH).dropna()[:100]
     # df_true = df[df.target > 0.5]
     # df_false = df[df.target <= 0.5]
 
