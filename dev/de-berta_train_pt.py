@@ -24,7 +24,7 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # --- Parameters ---
 MAXIMUM_LENGTH = 256
-BATCH_SIZE = 64
+BATCH_SIZE = 32
 EPOCHS = 1
 THRESHOLD = 0.5
 # DATASET_SIZE = 1_000
