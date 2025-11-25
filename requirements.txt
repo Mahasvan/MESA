@@ -11,3 +11,4 @@ torch
 streamlit
 transformers==4.49.0
 tensorflow==2.19.0
+pytorch-transformers
