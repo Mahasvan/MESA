@@ -25,7 +25,7 @@ MAXIMUM_LENGTH = 256
 BATCH_SIZE = 64
 EPOCHS = 50
 THRESHOLD = 0.5
-DATASET_SIZE = 1_000
+# DATASET_SIZE = 1_000
 
 # Device Configuration
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if (torch.backends.mps.is_available()) else "cpu")
@@ -50,7 +50,7 @@ def load_and_process_data():
     if not os.path.exists(DATA_PATH):
         raise FileNotFoundError(f"Could not find dataset at {DATA_PATH}")
 
-    df = pd.read_csv(DATA_PATH)
+    df = pd.read_csv(DATA_PATH).dropna()
     # df_true = df[df.target > 0.5]
     # df_false = df[df.target <= 0.5]
 
@@ -67,6 +67,8 @@ def load_and_process_data():
 def main():
     # 1. Prepare Data
     x_train, x_test, y_train, y_test = load_and_process_data()
+
+    # print(x_train.tolist()[:10])
 
     # 2. Tokenization
     print(f"Loading tokenizer: {MODEL_NAME}")
