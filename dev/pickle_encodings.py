@@ -15,7 +15,6 @@ maximum_length = 256  # Max length of input sequences
 
 threshold = 0.5
 
-print("Dataset size:", DATASET_SIZE)
 
 PICKLE_LOCATION = "../pickles"
 
