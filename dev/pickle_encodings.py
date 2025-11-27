@@ -14,7 +14,7 @@ print("Imported libraries!")
 maximum_length = 256  # Max length of input sequences
 
 threshold = 0.5
-DATASET_SIZE = 1_000
+DATASET_SIZE = 100_000
 
 print("Dataset size:", DATASET_SIZE)
 
