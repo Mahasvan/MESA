@@ -10,17 +10,23 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report
 from sklearn.model_selection import train_test_split
 from torch.utils.data import DataLoader, TensorDataset
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from transformers import AutoModelForSequenceClassification
+import pickle
 
 # --- Configuration & Paths ---
 OUTPUT_DIR = "deberta_trained"
 DATA_PATH = "../jigsaw/dataset_text_target.csv"  # Ensure this path exists relative to where you run the script
+PICKLE_LOCATION = "../pickles"
+
 MODEL_NAME = "microsoft/deberta-v3-base"
 
-os.environ["TOKENIZERS_PARALLELISM"] = "false"
+# os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 # Create output directory
 os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+
+
 
 # --- Parameters ---
 MAXIMUM_LENGTH = 256
@@ -70,30 +76,14 @@ def main():
     # 1. Prepare Data
     x_train, x_test, y_train, y_test = load_and_process_data()
 
-    # print(x_train.tolist()[:10])
 
-    # 2. Tokenization
-    print(f"Loading tokenizer: {MODEL_NAME}")
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, do_lower_case=True)
-
-    print("Encoding data...")
-    X_train_encoded = tokenizer.batch_encode_plus(
-        x_train.tolist(),
-        padding='max_length',
-        truncation=True,
-        max_length=MAXIMUM_LENGTH,
-        add_special_tokens=True,
-        return_tensors='pt',
-    )
-
-    X_test_encoded = tokenizer.batch_encode_plus(
-        x_test.tolist(),
-        padding='max_length',
-        truncation=True,
-        max_length=MAXIMUM_LENGTH,
-        add_special_tokens=True,
-        return_tensors='pt',
-    )
+    print("Loading training encodings")
+    with open(os.path.join(PICKLE_LOCATION, f"X_train_encoded.pkl"), "rb") as f:
+        X_train_encoded = pickle.load(f)
+    print("Loading testing encodings")
+    with open(os.path.join(PICKLE_LOCATION, f"X_test_encoded.pkl"), "rb") as f:
+        X_test_encoded = pickle.load(f)
+    print("Loaded encodings!")
 
     # 3. Create Datasets & Loaders
     train_dataset = TensorDataset(
