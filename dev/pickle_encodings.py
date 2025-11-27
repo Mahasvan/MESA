@@ -14,7 +14,6 @@ print("Imported libraries!")
 maximum_length = 256  # Max length of input sequences
 
 threshold = 0.5
-DATASET_SIZE = 100_000
 
 print("Dataset size:", DATASET_SIZE)
 
@@ -23,10 +22,11 @@ PICKLE_LOCATION = "../pickles"
 # Load and preprocess the dataset
 # Make sure the path to your CSV is correct
 print("Reading dataset...")
-df = pd.read_csv("../jigsaw/dataset_text_target.csv")
-df_true = df[df.target > 0.5]
-df_false = df[df.target <= 0.5]
-df = pd.concat([df_true[:DATASET_SIZE // 2], df_false[:DATASET_SIZE // 2]], axis=0)
+df = pd.read_csv("../jigsaw/dataset_text_target.csv").dropna()
+print("Dataset size:", len(df))
+# df_true = df[df.target > 0.5]
+# df_false = df[df.target <= 0.5]
+# df = pd.concat([df_true[:DATASET_SIZE // 2], df_false[:DATASET_SIZE // 2]], axis=0)
 mapper = lambda x: 1 if x > 0.5 else 0
 df['target'] = df['target'].apply(mapper)
 print("Read dataset!")
