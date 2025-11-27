@@ -1,3 +1,5 @@
+import time
+
 print("Importing libraries...")
 import os
 import pickle
@@ -55,6 +57,7 @@ test_file = os.path.join(PICKLE_LOCATION, "X_test_encoded.pkl")
 print("Train file:", train_file)
 print("Test file:", test_file)
 
+start = time.time()
 print("Encoding train...")
 X_train_encoded = tokenizer.batch_encode_plus(
     x_train.tolist(),
@@ -65,7 +68,8 @@ X_train_encoded = tokenizer.batch_encode_plus(
     return_tensors='pt',  # Return PyTorch tensors
     verbose=True
 )
-print("Encoded train file!")
+end = time.time()
+print(f"Encoded train file! Time Taken: {int(end - start)} seconds")
 
 print("Writing to disk...")
 with open(train_file, "wb") as f:
@@ -73,6 +77,7 @@ with open(train_file, "wb") as f:
 print("Written to disk!")
 
 print("Encoding test...")
+start = time.time()
 X_test_encoded = tokenizer.batch_encode_plus(
     x_test.tolist(),
     padding='max_length',
@@ -82,7 +87,8 @@ X_test_encoded = tokenizer.batch_encode_plus(
     return_tensors='pt',  # Return PyTorch tensors
     verbose=True
 )
-print("Encoded test file!")
+end = time.time()
+print(f"Encoded test file! Time Taken: {int(end - start)} seconds")
 
 print("Writing to disk...")
 with open(test_file, "wb") as f:
