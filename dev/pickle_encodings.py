@@ -47,7 +47,7 @@ model_name = "microsoft/deberta-v3-base"
 
 # Tokenize and encode the data using the BERT tokenizer
 print("Loading tokenizer:", model_name)
-tokenizer = AutoTokenizer.from_pretrained(model_name, do_lower_case=True)
+tokenizer = AutoTokenizer.from_pretrained(model_name, do_lower_case=True, use_fast=False)
 print("Loaded tokenizer!")
 
 train_file = os.path.join(PICKLE_LOCATION, "X_train_encoded.pkl")
